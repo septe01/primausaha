@@ -392,6 +392,8 @@ $('.batalmat').click(function(){
 
     $(".proyekId").show()
     $(".supId").show()
+    $('[name="supId"]').prop('required',true)
+    $('[name="proyekId"]').prop('required',true)
 
     $(".proyekIdu").hide()
     $('[name="proyekIdu"]').removeAttr('required')
@@ -419,3 +421,67 @@ $(document).on('keyup', '[name="mharga"] ,[name="mjumlah"]', function(event) {
     $('[name="mtotal"]').val(hrg * jml).simpleMoneyFormat()
    
 });
+
+
+//===============alat================
+$('.althps').click(function(event) {
+    $("[name='id']").val($(this).data('id'));
+});
+
+$('.altubah').click(function(){
+    $('[name="idm"]').val($(this).data('id'))
+    $('[name="nama"]').val($(this).data('nmalat'))
+    
+    $('.proyekubah').text($(this).data('nmproyek'))
+    $('.proyekubah').val($(this).data('idproyek'))
+    $('.supubah').text($(this).data('nmsuplayer'))
+    $('.supubah').val($(this).data('idsuplayer'))
+
+    $('[name="mharga"]').val($(this).data('harga')).simpleMoneyFormat()
+    $('[name="mjumlah"]').val($(this).data('jumlah'))
+    $('[name="mtotal"]').val($(this).data('total')).simpleMoneyFormat()
+
+
+     // ubh tmbol
+     $('.savealt').removeAttr('name', 'btn-alat');    
+     $('.savealt').attr('name', 'altubah');
+     $('.savealt span').text("Ok");
+     $('.jdlForm').text("Ubah Alat");
+ 
+     // 
+     $('.batalalt span').text("Batal");
+     $('.batalalt').removeClass('btn-warning');
+     $('.batalalt').addClass('btn-danger');
+     $('.batalalt i').addClass('red');
+     
+    $(".proyekId").hide()
+    $('.supId').hide()
+
+    $('[name="proyekId"]').removeAttr('required')
+    $('[name="supId"]').removeAttr('required')
+    $(".proyekIdu").show()
+    $(".supIdu").show()
+})
+
+$('.batalalt').click(function(){
+    $('.jdlForm').text("Tambah Alat")
+    $('.savealt').removeAttr('name', 'altubah');
+    $('.savealt').attr('name', 'btn-alat');    
+     $('.savealt span').text("Simpan")
+
+    $('.batalalt').removeClass('btn-danger')
+    $('.batalalt').addClass('btn-warning')
+    $('.batalalt i').removeClass('red')
+    $('.batalalt span').text('reset')
+
+    $(".supId").show()
+    $(".proyekId").show()
+    $('[name="supId"]').prop('required',true)
+    $('[name="proyekId"]').prop('required',true)
+
+    $(".proyekIdu").hide()
+    $('[name="proyekIdu"]').removeAttr('required')
+
+    $(".supIdu").hide()
+    $('[name="supIdu"]').removeAttr('required')
+})

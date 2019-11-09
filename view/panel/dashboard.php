@@ -123,6 +123,10 @@
                             elseif($panel == "material"){
                                 include '../panel/material.php';
                             }
+                            }
+                            elseif($panel == "alat"){
+                                include '../panel/alat.php';
+                            }
                         }else{
                                 include '../panel/home.php';
                             }

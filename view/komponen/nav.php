@@ -104,6 +104,19 @@
                     <b class="arrow"></b>
                 </li>
 
+                <li class="<?php if($_GET['panel'] == 'alat'){
+                        echo"active";
+                    } ?>">
+                    <a href="?panel=alat">
+                        <i class="menu-icon fa fa-lightbulb-o"></i>
+                         <span style="display: block; text-indent: 10px">
+                             Alat Bantu
+                         </span>
+                    </a>
+
+                    <b class="arrow"></b>
+                </li>
+
             </ul>
         </li>
 

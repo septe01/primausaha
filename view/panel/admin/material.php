@@ -93,7 +93,7 @@ if(isset($_POST['matubah'])){
             <li>
                 <a href="#">Proyek</a>
             </li>
-            <li class="active">Materal</li>
+            <li class="active">Material</li>
         </li>
         <!-- <li class="active">Dashboard</li> -->
     </ul><!-- /.breadcrumb -->  

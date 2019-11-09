@@ -120,6 +120,9 @@
 							elseif($panel == "material"){
                                 include 'material.php';
                             }
+                            elseif($panel == "alat"){
+                                include 'alat.php';
+                            }
                         }else{
                                 include 'home.php';
                             }
