@@ -62,6 +62,13 @@ $('.suppubah').click(function (e) {
     
 });
 
+$('.batal').click(function(){
+    $('#jdlForm').text("Tambah Suplayer")
+    $('.batal').removeClass('btn-danger')
+    $('.batal').addClass('btn-warning')
+    $('.batal i').addClass('warning')
+})
+
 $('.batal').click(function (e) { 
     $('.save').removeAttr('name', 'suppubah');
     $('.save').attr('name', 'btn-supp');
@@ -98,9 +105,11 @@ $('.kontubah').click(function (e) {
     $("[name='tel']").val($(this).data('tel'))
     $("[name='penJawab']").val($(this).data('petugas'))
 
+    
     $('.save').removeAttr('name', 'btn-kont');    
     $('.save').attr('name', 'kontubah');
     $('.save span').text("Ok");
+    $('.jdlForm').text("Ubah Kontraktor")
 
     // 
     $('.batal span').text("Batal");
@@ -108,6 +117,13 @@ $('.kontubah').click(function (e) {
     $('.batal').addClass('btn-danger');
     $('.batal i').addClass('red');
 });
+
+$('.batal').click(function(){
+    $('.jdlForm').text("Tambah Kontraktor")
+    $('.batal').removeClass('btn-danger')
+    $('.batal').addClass('btn-warning')
+    $('.batal i').addClass('warning')
+})
 
 
 
@@ -121,6 +137,7 @@ $('.pekubah').click(function (e) {
     $('.save').removeAttr('name', 'btn-kont');    
     $('.save').attr('name', 'pekubah');
     $('.save span').text("Ok");
+    $('.jdlForm').text("Ubah Pekerjaan")
 
     // 
     $('.batal span').text("Batal");
@@ -128,6 +145,14 @@ $('.pekubah').click(function (e) {
     $('.batal').addClass('btn-danger');
     $('.batal i').addClass('red');
 });
+
+$('.batal').click(function(){
+    $('.jdlForm').text("Tambah Pekerjaan")
+    $('.batal').removeClass('btn-danger')
+    $('.batal').addClass('btn-warning')
+    $('.batal i').removeClass('red')
+})
+
 
 $('.tmbproyek').click(function(event) {
       $("[name='proyekId']").val('')
@@ -181,7 +206,8 @@ $('.proyekhps').click(function(event) {
         var ttl     = $('[name="addtotal"]').val()
         var total   = parseFloat(ttl.replace(/,/g,''))
         var ppn     = parseFloat($(this).val().replace(/,/g,''))
-        $('[name="addgtotal"]').val(ppn * total / 100).simpleMoneyFormat()
+        var hppn    = ppn * total / 100
+        $('[name="addgtotal"]').val(parseInt(total - hppn)).simpleMoneyFormat()
     });
 
     // hapus 
@@ -263,12 +289,12 @@ $('.proyekhps').click(function(event) {
         }else{
             dtppn = parseFloat(uppn.replace(/,/g,''))
         }
-
+        var hppn = dtppn * dttotal / 100
         // var ppn     = parseFloat($(this).val().replace(/,/g,''))
-        $('[name="gtotal"]').val(dtppn * dttotal / 100).simpleMoneyFormat()
+        $('[name="gtotal"]').val(parseInt(dttotal - hppn)).simpleMoneyFormat()
     });
 
-// material
+//===============material================
 
 $('[name="mjumlah"]').keyup(function(event) {
     /* Act on the event */
@@ -311,3 +337,85 @@ function isNumber(){
         $('#number').text("")
     }
 }
+
+// ubah
+$('.matubah').click(function(){
+    $('[name="idm"]').val($(this).data('id'))
+    $('[name="nama"]').val($(this).data('nmmaterial'))
+    
+    $('.proyekubah').text($(this).data('nmproyek'))
+    $('.proyekubah').val($(this).data('idproyek'))
+    $('.supubah').text($(this).data('nmsuplayer'))
+    $('.supubah').val($(this).data('idsuplayer'))
+
+    $('[name="jenis"]').val($(this).data('jenis'))
+    
+    $('[name="mharga"]').val($(this).data('harga')).simpleMoneyFormat()
+    $('[name="mjumlah"]').val($(this).data('jumlah'))
+    $('[name="mtotal"]').val($(this).data('total')).simpleMoneyFormat()
+
+
+     // ubh tmbol
+     $('.savemat').removeAttr('name', 'btn-material');    
+     $('.savemat').attr('name', 'matubah');
+     $('.savemat span').text("Ok");
+     $('.jdlForm').text("Ubah Material");
+ 
+     // 
+     $('.batalmat span').text("Batal");
+     $('.batalmat').removeClass('btn-warning');
+     $('.batalmat').addClass('btn-danger');
+     $('.batalmat i').addClass('red');
+     
+    $(".proyekId").hide()
+    $('.supId').hide()
+
+    $('[name="proyekId"]').removeAttr('required')
+    $('[name="supId"]').removeAttr('required')
+    $(".proyekIdu").show()
+    $(".supIdu").show()
+
+
+})
+
+
+$('.batalmat').click(function(){
+    $('.jdlForm').text("Tambah Matrial")
+    $('.savemat').removeAttr('name', 'matubah');
+    $('.savemat').attr('name', 'btn-material');    
+     $('.savemat span').text("Simpan")
+
+    $('.batalmat').removeClass('btn-danger')
+    $('.batalmat').addClass('btn-warning')
+    $('.batalmat i').removeClass('red')
+    $('.batalmat span').text('reset')
+
+    $(".proyekId").show()
+    $(".supId").show()
+
+    $(".proyekIdu").hide()
+    $('[name="proyekIdu"]').removeAttr('required')
+
+    $(".supIdu").hide()
+    $('[name="supIdu"]').removeAttr('required')
+})
+
+$( document ).ready(function() {
+    $(".proyekId").show()
+    $(".supId").show()
+
+    $(".proyekIdu").hide()
+    $(".supIdu").hide()
+
+    $('[name="proyekIdu"]').removeAttr('required')
+    $('[name="supIdu"]').removeAttr('required')
+});
+
+$(document).on('keyup', '[name="mharga"] ,[name="mjumlah"]', function(event) {
+
+    let hrg = parseFloat($('[name="mharga"]').val().replace(/,/g,''))
+    let jml = parseFloat($('[name="mjumlah"]').val().replace(/,/g,''))
+
+    $('[name="mtotal"]').val(hrg * jml).simpleMoneyFormat()
+   
+});

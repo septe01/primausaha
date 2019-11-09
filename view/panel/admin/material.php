@@ -42,25 +42,34 @@
             ";
        }
     }
+// ubah data
+if(isset($_POST['matubah'])){
+    $id         = htmlspecialchars($_POST['idm']);
+    $nama       = htmlspecialchars($_POST['nama']);
+    $supIdu     = htmlspecialchars($_POST['supIdu']);
+    $proyekIdu  = htmlspecialchars($_POST['proyekIdu']);
+    $tanggal    = date('Y-m-d');
+    $jenis      = htmlspecialchars($_POST['jenis']);
+    $mharga     = str_replace(",","",htmlspecialchars($_POST['mharga']));
+    $mjumlah    = str_replace(",","",htmlspecialchars($_POST['mjumlah']));
+    $mtotal     = str_replace(",","",htmlspecialchars($_POST['mtotal']));
 
-// ubah pekerjaan
-if(isset($_POST['pekubah'])){
+    $data = "nama_material='{$nama}',
+                id_supplier='{$supIdu}',
+                id_proyek='{$proyekIdu}', 
+                tanggal='{$tanggal}', 
+                jenis='{$jenis}', 
+                harga='{$mharga}', 
+                jumlah='{$mjumlah}', 
+                total='{$mtotal}' 
+            ";
 
-    $id = htmlspecialchars($_POST['id']);
-    $nama = htmlspecialchars($_POST['nama']);
-    $jenis = htmlspecialchars($_POST['jenis']);
-    $keterangan = htmlspecialchars($_POST['keterangan']);
+    $id = "id_material=".$id;
 
-    $data = "nm_pekerjaan='{$nama}',
-            jenis='{$jenis}',
-            keterangan='{$keterangan}' ";
-
-    $id = "id_pekerjaan=".$id;
-
-    if(ubahdata( $data, "data_pekerjaan", $id ) > 0 ){
+    if(ubahdata( $data, "data_material", $id ) > 0 ){
             echo "<script>
                     alert('Data Berhasil di Ubah.');
-                    document.location.href='{$_SESSION['baseAdmin']}?panel=pekerjaan';
+                    document.location.href='{$_SESSION['baseAdmin']}?panel=material';
                   </script>
             "; 
         }else{
@@ -180,20 +189,20 @@ if(isset($_POST['pekubah'])){
                                 <form method="post" onsubmit="" class="form-horizontal kontraktor">
                                     <div class="modal-content" >
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Tambah Material</h4>
+                                            <h4 class="modal-title jdlForm">Tambah Material</h4>
                                         </div>
                                         <div class="modal-header" style="">
                                             <div class="">
                                                 <label for="nm" class="form-field-8">Nama Material</label>
                                                 <input type="text" autofocus class="form-control" placeholder="Nama Material" id="nm" name="nama" autocomplete="off">
-                                                 <input type="hidden" id="" name="idx">
+                                                 <input type="hidden" id="" name="idm">
                                                  <small id="nma" class="form-text text-danger"></small>
                                             </div>
-
-                                            <div class="mt-1">
+                                            <!-- tambah -->
+                                            <div class="mt-1 proyekId">
                                                 <label for="nm" class="form-field-8">Proyek</label>
                                                 <select name="proyekId" id="proid" class="form-control" required="">
-                                                    <option value="">Pilih Proyek</option>
+                                                    <option class="proyek" value="" selected="">Pilih Proyek</option>
                                                     <?php 
                                                         $Proyek = tampilData("data_proyek");
                                                         foreach ($Proyek as $pro) :?>
@@ -206,13 +215,47 @@ if(isset($_POST['pekubah'])){
                                                 </select>
                                                  <small id="nma" class="form-text text-danger"></small>
                                             </div>
-
-                                            <div class="mt-1">
+                                            <!-- ubah -->
+                                            <div class="mt-1 proyekIdu">
+                                                <label for="nm" class="form-field-8">Proyek</label>
+                                                    <select name="proyekIdu" id="proid" class="form-control" required="">
+                                                        <option class="proyekubah" value="" selected="">Pilih Proyek</option>
+                                                        <?php 
+                                                            $Proyek = tampilIfExist("data_proyek","data_material","id_proyek");
+                                                            foreach ($Proyek as $pro) :?>
+                                                            <option value="<?= $pro['id_proyek'] ?>">
+                                                                    <?= $pro['nama_proyek'] ?> 
+                                                                </option> 
+                                                            <?php
+                                                            endforeach;
+                                                        ?>
+                                                    </select>
+                                                    <small id="nma" class="form-text text-danger"></small>
+                                            </div>
+                                           <!-- tambah -->
+                                            <div class="mt-1 supId">
                                                 <label for="nm" class="form-field-8">Suplayer</label>
                                                 <select name="supId" id="supid" class="form-control" required="">
                                                     <option value="">Pilih Suplayer</option>
                                                     <?php 
                                                         $suplayer = tampilData("supplier");
+                                                        foreach ($suplayer as $sup) :?>
+                                                           <option value="<?= $sup['id_supplier'] ?>">
+                                                                <?= $sup['nama'] ?> Kategori <?= $sup['jenis'] ?>
+                                                            </option> 
+                                                        <?php
+                                                        endforeach;
+                                                    ?>
+                                                </select>
+                                                 <small id="nma" class="form-text text-danger"></small>
+                                            </div>
+                                            <!-- ubah -->
+                                            <div class="mt-1 supIdu">
+                                                <label for="nm" class="form-field-8">Suplayer</label>
+                                                <select name="supIdu" id="supidu" class="form-control" required="">
+                                                    <option class="supubah" value="">Pilih Suplayer</option>
+                                                    <?php 
+                                                        $suplayer = tampilIfExist("supplier","data_material","id_supplier");
                                                         foreach ($suplayer as $sup) :?>
                                                            <option value="<?= $sup['id_supplier'] ?>">
                                                                 <?= $sup['nama'] ?> Kategori <?= $sup['jenis'] ?>
@@ -232,19 +275,19 @@ if(isset($_POST['pekubah'])){
 
                                             <div class="mt-1">
                                                 <label for="nm" class="form-field-8">Harga</label>
-                                                <input type="text" name="mharga" placeholder="100,000" class="form-control money numger" required="" onkeyup="isNumber()">
+                                                <input type="text" name="mharga" placeholder="100,000" class="form-control mharga money numger" required="" onkeyup="isNumber()">
                                                  <small id="number" class="form-text text-danger"></small>
                                             </div>
 
                                             <div class="mt-1">
                                                 <label for="nm" class="form-field-8">Jumlah</label>
-                                                <input type="number" name="mjumlah" placeholder="10" class="form-control" required="" >
+                                                <input type="number" name="mjumlah" placeholder="10" class="form-control mjumlah" required="" >
                                                  <small id="nma" class="form-text text-danger"></small>
                                             </div>
 
                                             <div class="mt-1">
                                                 <label for="nm" class="form-field-8">Total</label>
-                                                <input type="text" name="mtotal" placeholder="1,000,000" class="form-control money" required="" readonly="" >
+                                                <input type="text" name="mtotal" placeholder="1,000,000" class="form-control money mtotal" required="" readonly="" >
                                                  <small id="nma" class="form-text text-danger"></small>
                                             </div>
                                             
@@ -252,8 +295,8 @@ if(isset($_POST['pekubah'])){
                                             
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="reset" class="btn batal btn-white btn-warning btn-bold" data-dismiss="modal"><i class="ace-icon fa fa-exclamation-circle bigger-110  "></i> <span>Reset</span></button>
-                                            <button type="submit" name="btn-material" class="btn btn-white btn-primary btn-bold save"><i class="ace-icon fa fa-check-square-o bigger-110 blue"></i><span>Simpan</span></button>
+                                            <button type="reset" class="btn batalmat btn-white btn-warning btn-bold" data-dismiss="modal"><i class="ace-icon fa fa-exclamation-circle bigger-110  "></i> <span>Reset</span></button>
+                                            <button type="submit" name="btn-material" class="btn btn-white btn-primary btn-bold savemat"><i class="ace-icon fa fa-check-square-o bigger-110 blue"></i><span>Simpan</span></button>
                                         </div>
                                     </div>
                                 </form>
@@ -297,9 +340,17 @@ if(isset($_POST['pekubah'])){
                                                 <td class="money"><?= $mat['total'] ?></td>
                                                 <td style="text-align:center" class="hilang">
                                                     <div class="hidden-sm hidden-xs action-buttons">
-
                                                         <a class="green matubah" href="#"
-                                                            
+                                                        data-id = "<?= $mat['id_material'] ?>"
+                                                        data-nmmaterial = "<?= $mat['nama_material'] ?>"
+                                                        data-nmproyek = "<?= $proyek['nama_proyek'] ?>"
+                                                        data-idproyek = "<?= $mat['id_proyek'] ?>"
+                                                        data-nmsuplayer = "<?= $suplayer['nama'] ?>"
+                                                        data-idsuplayer = "<?= $mat['id_supplier'] ?>"
+                                                        data-jenis = "<?= $mat['jenis'] ?>"
+                                                        data-harga = "<?= $mat['harga'] ?>"
+                                                        data-jumlah = "<?= $mat['jumlah'] ?>"
+                                                        data-total = "<?= $mat['total'] ?>"
                                                         >
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                         </a>

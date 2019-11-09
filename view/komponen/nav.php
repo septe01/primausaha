@@ -52,9 +52,9 @@
                     ){
                         echo"active";
             } ?>"
-        ">
+        >
             <a href="#" class="dropdown-toggle">
-                <i class="menu-icon glyphicon glyphicon-th-list"></i>
+                <i class="menu-icon fa fa-tachometer"></i>
                 <span class="menu-text"> Proyek </span>
 
                 <b class="arrow fa fa-angle-down"></b>

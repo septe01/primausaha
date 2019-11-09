@@ -175,7 +175,7 @@ if(isset($_POST['kontubah'])){
                                 <form method="post" onsubmit="" class="form-horizontal kontraktor">
                                     <div class="modal-content" >
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Tambah Kontraktor</h4>
+                                            <h4 class="modal-title jdlForm">Tambah Kontraktor</h4>
                                         </div>
                                         <div class="modal-header" style="">
                                             <div class="form-group">
