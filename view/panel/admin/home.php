@@ -269,41 +269,41 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Nama Depan</label>
-                                                        <input name="nmdpn" type="text" class="form-control" value="" autocomplete="off" autofocus placeholder="Jimmy">
+                                                        <input name="nmdpn" type="text" class="form-control" value="" autocomplete="off" autofocus placeholder="Jimmy" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Nama Belakang</label>
-                                                        <input name="nmblkg" id="" type="text" class="form-control" placeholder="Rahmana" autocomplete="off" >
+                                                        <input name="nmblkg" id="" type="text" class="form-control" placeholder="Rahmana" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Email</label>
-                                                        <input name="email" type="email" class="form-control" id="" placeholder="Jimmy@rahmana.com" autocomplete="off" >
+                                                        <input name="email" type="email" class="form-control" id="" placeholder="Jimmy@rahmana.com" autocomplete="off" required="" >
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Username</label>
-                                                        <input name="username" type="text" id="" class="form-control" placeholder="jimmy" autocomplete="off" >
+                                                        <input name="username" type="text" id="" class="form-control" placeholder="jimmy" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Tanggal Lahir</label>
-                                                        <input type="date" name="tgllhr" id="" class="form-control" autocomplete="off">
+                                                        <input type="date" name="tgllhr" id="" class="form-control" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Level</label>
-                                                        <select name="level" id="" class="custom-select form-control">
+                                                        <select name="level" id="" class="custom-select form-control" required="">
                                                             <option value="">Pilih</option>
                                                             <option value="admin">Admin</option>
                                                             <option value="owner">Owner</option>
@@ -315,7 +315,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Alamat</label>
-                                                        <textarea name="alamat" id="" class="form-control" placeholder="Jl.River Raya No.21" autocomplete="off" maxlength="50"></textarea>
+                                                        <textarea name="alamat" id="" class="form-control" placeholder="Jl.River Raya No.21" autocomplete="off" maxlength="50" required=""></textarea>
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
@@ -380,41 +380,41 @@
                                                     <input name="id" type="hidden" class="form-control" value="">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Nama Depan</label>
-                                                        <input name="nmdpn" type="text" class="form-control" value="" autocomplete="off" autofocus placeholder="Jimmy">
+                                                        <input name="nmdpn" type="text" class="form-control" value="" autocomplete="off" autofocus placeholder="Jimmy" required="">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Nama Belakang</label>
-                                                        <input name="nmblkg" id="" type="text" class="form-control" placeholder="Rahmana" autocomplete="off" >
+                                                        <input name="nmblkg" id="" type="text" class="form-control" placeholder="Rahmana" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Email</label>
-                                                        <input name="email" type="email" class="form-control" id="" placeholder="Jimmy@rahmana.com" autocomplete="off" >
+                                                        <input name="email" type="email" class="form-control" id="" placeholder="Jimmy@rahmana.com" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Username</label>
-                                                        <input name="username" type="text" id="" class="form-control" placeholder="jimmy" autocomplete="off" >
+                                                        <input name="username" type="text" id="" class="form-control" placeholder="jimmy" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Tanggal Lahir</label>
-                                                        <input type="date" name="tgllhr" id="" class="form-control" autocomplete="off">
+                                                        <input type="date" name="tgllhr" id="" class="form-control" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Level</label>
-                                                        <select name="level" id="" class="custom-select form-control">
+                                                        <select name="level" id="" class="custom-select form-control" required="">
                                                             <option value="">Pilih</option>
                                                             <option value="admin">Admin</option>
                                                             <option value="owner">Owner</option>
@@ -426,7 +426,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Alamat</label>
-                                                        <textarea name="alamat" id="" class="form-control" placeholder="Jl.River Raya No.21" autocomplete="off" maxlength="50"></textarea>
+                                                        <textarea name="alamat" id="" class="form-control" placeholder="Jl.River Raya No.21" autocomplete="off" maxlength="50" required=""></textarea>
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>

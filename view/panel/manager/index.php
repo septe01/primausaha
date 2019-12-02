@@ -1,12 +1,12 @@
-<?php 
-
-
-    $base_url = 'http://localhost/primausaha/';
-    
+<?php   
     // header
 	// include 'view/komponen/header.php';
-	include '../komponen/header.php';
-	include '../../control/function.php';
+	include '../../komponen/header.php';
+	include '../../../control/function.php';
+	// var_dump($_SESSION);
+	if(empty($_SESSION)){
+		header("Location:http://localhost/primausaha/");
+	}
 ?>
 
 <!-- content -->
@@ -24,7 +24,7 @@
 				</button>
 
 				<div class="navbar-header pull-left">
-					<a href="index.html" class="navbar-brand">
+					<a href="<?= $_SESSION['baseAdmin']?>" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
 							Prima Usaha Era Mandiri
@@ -40,19 +40,19 @@
 								<img class="nav-user-photo" src="<?= $base_url; ?>/assets/images/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									<?php echo $_SESSION['username']; ?>
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
 							</a>
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
+								<!-- <li>
 									<a href="#">
 										<i class="ace-icon fa fa-cog"></i>
 										Settings
 									</a>
-								</li>
+								</li> -->
 
 								<li>
 									<a href="profile.html">
@@ -64,7 +64,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="http://localhost/primausaha/logut.php">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -86,7 +86,7 @@
 					try{ace.settings.loadState('sidebar')}catch(e){}
                 </script>
                 
-                <?php include '../komponen/nav.php'; ?>
+                <?php include '../../komponen/nav.php'; ?>
 				<!-- /.nav-list -->
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
@@ -95,40 +95,55 @@
 			</div>
 
 			<div class="main-content">
+				
 				<div class="main-content-inner">
 					
-                    <?php 
-                        
+					<?php
+
+
+
+
+
+
                         if(isset($_GET['panel'])){
+
                             $panel = $_GET['panel'];
                             
-                            if($panel == "user"){
-                                include '../panel/home.php';
+                            if($panel == "home"){
+                                include 'home.php';
                             }
                             elseif($panel == "suplayer"){
-                                include '../panel/suplayer.php';
+                                include 'suplayer.php';
                             }
                             elseif($panel == "kontaktor"){
-                                include '../panel/kontaktor.php';
+                                include 'kontaktor.php';
                             }
                             elseif($panel == "pekerjaan"){
-                                include '../panel/pekerjaan.php';
+                                include 'pekerjaan.php';
                             }
                             elseif($panel == "proyek"){
-                                include '../panel/proyek.php';
+                                include 'proyek.php';
                             }
                             elseif($panel == "rab"){
-                                include '../panel/rab.php';
+                                include 'rab.php';
                             }
-                            elseif($panel == "material"){
-                                include '../panel/material.php';
-                            }
+							elseif($panel == "material"){
+                                include 'material.php';
                             }
                             elseif($panel == "alat"){
-                                include '../panel/alat.php';
+                                include 'alat.php';
+                            }
+                            elseif($panel == "status"){
+                                include 'status.php';
+                            }
+                            elseif($panel == ""){
+                            	include 'error.php';
+                            }
+                            elseif($panel != "user" && $panel != "suplayer" && $panel != "kontaktor" && $panel != "pekerjaan" && $panel != "proyek" && $panel != "rab" && $panel != "material" && $panel != "alat" && $panel != "status"){
+                            	include 'error.php';
                             }
                         }else{
-                                include '../panel/home.php';
+                                include 'home.php';
                             }
                         
                         
@@ -141,5 +156,5 @@
 
 <?php 
     // footer
-    include '../komponen/footer.php';
+    include '../../komponen/footer.php';
 ?>

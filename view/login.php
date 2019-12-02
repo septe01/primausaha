@@ -1,5 +1,16 @@
 <?php
 
+	if(isset($_SESSION['level']) != ''){
+			$level = $_SESSION['level'];
+		if($level == 'admin'){
+			header("Location:".$_SESSION['baseAdmin']);
+		}else if($level == 'owner'){
+			header("Location:".$_SESSION['baseAdmin']);
+		}else if($level == 'manager'){
+			header("Location:".$_SESSION['baseAdmin']);
+		}
+	}
+
     if(isset($_POST['submit'])){
         login($_POST);
     }

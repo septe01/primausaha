@@ -1,15 +1,18 @@
 <?php 
 
-// tambah data pekerjaan
-    if(isset($_POST['btn-peker'])){
+// tambah data kontraktor
+    if(isset($_POST['btn-kont'])){
         // var_dump($_POST);die;
         $nm = htmlspecialchars($_POST['nama']);
-        $jenis = htmlspecialchars($_POST['jenis']);
-        $keterangan = htmlspecialchars($_POST['keterangan']);
+        $alamat = htmlspecialchars($_POST['alamat']);
+        $email = htmlspecialchars($_POST['email']);
+        $tel = htmlspecialchars($_POST['tel']);
+        $petugas = htmlspecialchars($_POST['penJawab']);
 
-        $field = 'id_pekerjaan,nm_pekerjaan,jenis,keterangan';
-        $data = "'','$nm','$jenis','$keterangan'";
-        if(tambahData("data_pekerjaan", $field, $data) > 0 ){
+        $field = 'id_kontraktor,nama,alamat,email,telepon,kepala_proyek
+';
+        $data = "null,'$nm','$alamat','$email','$tel','$petugas'";
+        if(tambahData("kontraktor", $field, $data) > 0 ){
             echo "<script>
                     alert('Data Berhasil di Tambah.');
                   </script>
@@ -23,38 +26,44 @@
     }
 
 // tampil data kontraktor
-    $pekerjaan = tampilData("data_pekerjaan");
+    $kontraktor = tampilData("kontraktor");
 
-// hapus data Pekerjaan
+// hapus data kontraktor
     if(isset($_POST['hapus']) > 0){
 
-       if( hapus("data_pekerjaan",'id_pekerjaan',$_POST) ){
+       if( hapus("kontraktor",' 
+id_kontraktor',$_POST) ){
            echo "<script>
                     alert('Data Berhasil di Hapus.');
-                    document.location.href='http://localhost/primausaha/?panel=pekerjaan';
+                    document.location.href='{$_SESSION['baseAdmin']}?panel=kontaktor';
                   </script>
             ";
        }
     }
 
-// ubah pekerjaan
-if(isset($_POST['pekubah'])){
+// ubah kontraktor
+if(isset($_POST['kontubah'])){
 
     $id = htmlspecialchars($_POST['id']);
     $nama = htmlspecialchars($_POST['nama']);
-    $jenis = htmlspecialchars($_POST['jenis']);
-    $keterangan = htmlspecialchars($_POST['keterangan']);
+    $alamat = htmlspecialchars($_POST['alamat']);
+    $email = htmlspecialchars($_POST['email']);
+    $tel = htmlspecialchars($_POST['tel']);
+    $petugas = htmlspecialchars($_POST['penJawab']);
 
-    $data = "nm_pekerjaan='{$nama}',
-            jenis='{$jenis}',
-            keterangan='{$keterangan}' ";
+    $data = "nama='{$nama}',
+            alamat='{$alamat}',
+            email='{$email}',
+            telepon='{$tel}',
+            kepala_proyek='{$petugas}'"
+            ;
 
-    $id = "id_pekerjaan=".$id;
+    $id = "id_kontraktor=".$id;
 
-    if(ubahdata( $data, "data_pekerjaan", $id ) > 0 ){
+    if(ubahdata( $data, "kontraktor", $id ) > 0 ){
             echo "<script>
                     alert('Data Berhasil di Ubah.');
-                    document.location.href='http://localhost/primausaha/?panel=pekerjaan';
+                    document.location.href='{$_SESSION['baseAdmin']}?panel=kontaktor';
                   </script>
             "; 
         }else{
@@ -69,9 +78,13 @@ if(isset($_POST['pekubah'])){
 ?>
 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
     <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="<?= $_SESSION['baseAdmin']?>">Home</a>
+            </li>
         <li>
-            <i class="ace-icon fa fa-laptop"></i>
-            <a href="#">Pekerjaan</a>
+            <i class="ace-icon fa fa-cog"></i>
+            <a href="#">Kontraktor</a>
         </li>
         <!-- <li class="active">Dashboard</li> -->
     </ul><!-- /.breadcrumb -->  
@@ -164,47 +177,46 @@ if(isset($_POST['pekubah'])){
                         <div class="row" >
                             <div class="col-md-4" >
                                 <form method="post" onsubmit="" class="form-horizontal kontraktor">
-                                    <div class="modal-content" >
+                                    <div class="modal-content pl-1 pr-1" >
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Tambah Pekerjaan</h4>
+                                            <h4 class="modal-title jdlForm">Tambah Kontraktor</h4>
                                         </div>
                                         <div class="modal-header" style="">
-                                            <div class="form-group">
-                                                <div class="col-sm-4 text-left">
-                                                    <label for="nm" class=" control-label">Nama Pekerjaan</label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                <input type="text" autofocus class="form-control" placeholder="Nama Pekerjaan" id="nm" name="nama" autocomplete="off">
+                                            <div class="form-group mt--1">
+                                                    <label for="nm" class=" control-label">PT</label>
+                                                <input type="text" autofocus class="form-control" placeholder="PT Nama" id="nm" name="nama" autocomplete="off" required="">
                                                 <input type="hidden" id="" name="id">
                                                 <small id="nma" class="form-text text-danger"></small>
-                                                </div>
-                                            </div>
-
-                                             <div class="form-group">
-                                                <div class="col-sm-4">
-                                                    <label class="control-label" for="jenis">Jenis</label>
-                                                </div>  
-                                                <div class="col-sm-8">
-                                                <input type="text" autofocus class="form-control" placeholder="Jenis Pekerjaan Yang Dilakukan" id="jenis" name="jenis" autocomplite="off" max-lenght=14 >
-                                                <small id="jns" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <div class="col-sm-4">
-                                                    <label class="control-label" for="keterangan">Keterangan</label>
-                                                </div>  
-                                                <div class="col-sm-8">
-                                                <textarea name="keterangan" id="keterangan" class="form-control" placeholder="Keterangan" autocomplete="off" maxlength="70"></textarea>
-                                                <small id="ket" class="form-text text-danger"></small>
-                                                </div>
+                                            <div class="form-group mt--1">
+                                                    <label class="control-label" for="alamat">Alamat</label>
+                                                <textarea name="alamat" id="alamat" class="form-control" placeholder="Jl.Marunda Raya No.21" autocomplete="off" maxlength="50" required=""></textarea>
+                                                <small id="almt" class="form-text text-danger"></small>
                                             </div>
                                             
+                                            <div class="form-group mt--1">
+                                                    <label class="control-label" for="email">Email</label>
+                                                <input type="text" autofocus class="form-control" placeholder="jhon@gmail.com" id="email" name="email" autocomplite="off" max-lenght="40" required="">
+                                                <small id="hp" class="form-text text-danger"></small>
+                                            </div>
+                                            
+                                            <div class="form-group mt--1">
+                                                    <label class="control-label" for="tel">Telp</label>
+                                                <input type="tel" autofocus class="form-control" placeholder="081231233" id="tel" name="tel" autocomplite="off" max-lenght="14" required="">
+                                                <small id="errorfax" class="form-text text-danger"></small>
+                                            </div>
+                                            
+                                            <div class="form-group mt--1">
+                                                    <label class="control-label" for="pen">Petugas</label>
+                                                <input name="penJawab" type="text" class="form-control" id="pen" placeholder="Jhon" autocomplete="off" required="">
+                                                <small id="errormail" class="form-text text-danger"></small>
+                                            </div>
                                             
                                         </div>
                                         <div class="modal-footer">
                                             <button type="reset" class="btn batal btn-white btn-warning btn-bold" data-dismiss="modal"><i class="ace-icon fa fa-exclamation-circle bigger-110  "></i> <span>Reset</span></button>
-                                            <button type="submit" name="btn-peker" class="btn btn-white btn-primary btn-bold save"><i class="ace-icon fa fa-check-square-o bigger-110 blue"></i><span>Simpan</span></button>
+                                            <button type="submit" name="btn-kont" class="btn btn-white btn-primary btn-bold save"><i class="ace-icon fa fa-check-square-o bigger-110 blue"></i><span>Simpan</span></button>
                                         </div>
                                     </div>
                                 </form>
@@ -212,7 +224,7 @@ if(isset($_POST['pekubah'])){
                             <div class="col">
                                 <div class="page-header">
                                 <h1>
-                                    List Pekerjaan
+                                    List Kontraktor
                                 </h1>
                             </div>
                                 <div class=" table-responsive">
@@ -220,9 +232,11 @@ if(isset($_POST['pekubah'])){
                                     <thead>
                                         <tr>
                                         <th>No</th>
-                                        <th>Nama Pekerjaan</th>
-                                        <th>Jenis</th>
-                                        <th>Keterangan</th>
+                                        <th>Nama PT</th>
+                                        <th>Alamat</th>
+                                        <th>Email</th>
+                                        <th>Telepon</th>
+                                        <th>Petugas</th>
                                         <th class="hidden-480" style="color: #707070; width:10%">Aksi</th>
                                         </tr>
                                     </thead>
@@ -230,28 +244,32 @@ if(isset($_POST['pekubah'])){
                                     <tbody>
                                         <?php 
                                         $no = 1;
-                                            foreach ($pekerjaan as $pek) :
+                                            foreach ($kontraktor as $kont) :
                                         ?>
                                             <tr>
                                                 <td><?= $no; ?></td>
-                                                <td><?= $pek['nm_pekerjaan'] ?></td>
-                                                <td><?= $pek['jenis'] ?></td>
-                                                <td><?= $pek['keterangan'] ?></td>
+                                                <td><?= $kont['nama'] ?></td>
+                                                <td><?= $kont['alamat'] ?></td>
+                                                <td><?= $kont['email'] ?></td>
+                                                <td><?= $kont['telepon'] ?></td>
+                                                <td><?= $kont['kepala_proyek'] ?></td>
                                                 <td style="text-align:center" class="hilang">
                                                     <div class="hidden-sm hidden-xs action-buttons">
 
-                                                        <a class="green pekubah" href="#"
-                                                            data-id = "<?= $pek['id_pekerjaan'] ?>"
-                                                            data-nama = "<?= $pek['nm_pekerjaan'] ?>"
-                                                            data-jenis = "<?= $pek['jenis'] ?>"
-                                                            data-keterangan = "<?= $pek['keterangan'] ?>"
+                                                        <a class="green kontubah" href="#"
+                                                            data-id = "<?= $kont['id_kontraktor'] ?>"
+                                                            data-nama = "<?= $kont['nama'] ?>"
+                                                            data-alamat = "<?= $kont['alamat'] ?>"
+                                                            data-email = "<?= $kont['email'] ?>"
+                                                            data-tel = "<?= $kont['telepon'] ?>"
+                                                            data-petugas = "<?= $kont['kepala_proyek'] ?>"
                                                         >
                                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                         </a>
 
                                                         <a class="red supphps" href="#" data-toggle = "modal"
-                                                        data-target = "#pekhps"
-                                                        data-id = "<?= $pek['id_pekerjaan'] ?>"
+                                                        data-target = "#kontphps"
+                                                        data-id = "<?= $kont['id_kontraktor'] ?>"
                                                        
                                                         >
                                                             <i class="ace-icon fa fa-trash-o bigger-130"></i>
@@ -272,7 +290,7 @@ if(isset($_POST['pekubah'])){
                             <!-- MODAL -->
                                  <!-- modal hps user -->
                                     <form method="post" onsubmit="">
-                                        <div id="pekhps" class="modal fade">
+                                        <div id="kontphps" class="modal fade">
                                             <div class="modal-dialog modal-md">
                                                 <div class="modal-content">
                                                     <div class="modal-header">

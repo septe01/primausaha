@@ -173,60 +173,40 @@ if(isset($_POST['kontubah'])){
                         <div class="row" >
                             <div class="col-md-4" >
                                 <form method="post" onsubmit="" class="form-horizontal kontraktor">
-                                    <div class="modal-content" >
+                                    <div class="modal-content pl-1 pr-1" >
                                         <div class="modal-header">
                                             <h4 class="modal-title jdlForm">Tambah Kontraktor</h4>
                                         </div>
                                         <div class="modal-header" style="">
-                                            <div class="form-group">
-                                                <div class="col-sm-2 text-left">
+                                            <div class="form-group mt--1">
                                                     <label for="nm" class=" control-label">PT</label>
-                                                </div>
-                                                <div class="col-sm-10">
-                                                <input type="text" autofocus class="form-control" placeholder="PT Nama" id="nm" name="nama" autocomplete="off">
+                                                <input type="text" autofocus class="form-control" placeholder="PT Nama" id="nm" name="nama" autocomplete="off" required="">
                                                 <input type="hidden" id="" name="id">
                                                 <small id="nma" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <div class="col-sm-2">
+                                            <div class="form-group mt--1">
                                                     <label class="control-label" for="alamat">Alamat</label>
-                                                </div>  
-                                                <div class="col-sm-10">
-                                                <textarea name="alamat" id="alamat" class="form-control" placeholder="Jl.Marunda Raya No.21" autocomplete="off" maxlength="50"></textarea>
+                                                <textarea name="alamat" id="alamat" class="form-control" placeholder="Jl.Marunda Raya No.21" autocomplete="off" maxlength="50" required=""></textarea>
                                                 <small id="almt" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <div class="col-sm-2">
+                                            <div class="form-group mt--1">
                                                     <label class="control-label" for="email">Email</label>
-                                                </div>  
-                                                <div class="col-sm-10">
-                                                <input type="text" autofocus class="form-control" placeholder="jhon@gmail.com" id="email" name="email" autocomplite="off" max-lenght=14 >
+                                                <input type="text" autofocus class="form-control" placeholder="jhon@gmail.com" id="email" name="email" autocomplite="off" max-lenght="40" required="">
                                                 <small id="hp" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <div class="col-sm-2">
+                                            <div class="form-group mt--1">
                                                     <label class="control-label" for="tel">Telp</label>
-                                                </div>  
-                                                <div class="col-sm-10">
-                                                <input type="tel" autofocus class="form-control" placeholder="081231233" id="tel" name="tel" autocomplite="off" max-lenght=14 >
+                                                <input type="tel" autofocus class="form-control" placeholder="081231233" id="tel" name="tel" autocomplite="off" max-lenght="14" required="">
                                                 <small id="errorfax" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <div class="col-sm-2">
+                                            <div class="form-group mt--1">
                                                     <label class="control-label" for="pen">Petugas</label>
-                                                </div>  
-                                                <div class="col-sm-10">
-                                                <input name="penJawab" type="text" class="form-control" id="pen" placeholder="Jhon" autocomplete="off" >
+                                                <input name="penJawab" type="text" class="form-control" id="pen" placeholder="Jhon" autocomplete="off" required="">
                                                 <small id="errormail" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
                                         </div>

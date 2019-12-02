@@ -3,6 +3,10 @@
 	// include 'view/komponen/header.php';
 	include '../../komponen/header.php';
 	include '../../../control/function.php';
+	// var_dump($_SESSION);
+	if(empty($_SESSION)){
+		header("Location:http://localhost/primausaha/");
+	}
 ?>
 
 <!-- content -->
@@ -20,7 +24,7 @@
 				</button>
 
 				<div class="navbar-header pull-left">
-					<a href="index.html" class="navbar-brand">
+					<a href="<?= $_SESSION['baseAdmin']?>" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
 							Prima Usaha Era Mandiri
@@ -43,12 +47,12 @@
 							</a>
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
+								<!-- <li>
 									<a href="#">
 										<i class="ace-icon fa fa-cog"></i>
 										Settings
 									</a>
-								</li>
+								</li> -->
 
 								<li>
 									<a href="profile.html">
@@ -60,7 +64,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="http://localhost/primausaha/logut.php">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
@@ -95,6 +99,12 @@
 				<div class="main-content-inner">
 					
 					<?php
+
+
+
+
+
+
                         if(isset($_GET['panel'])){
 
                             $panel = $_GET['panel'];
@@ -122,6 +132,15 @@
                             }
                             elseif($panel == "alat"){
                                 include 'alat.php';
+                            }
+                            elseif($panel == "status"){
+                                include 'status.php';
+                            }
+                            elseif($panel == ""){
+                            	include 'error.php';
+                            }
+                            elseif($panel != "user" && $panel != "suplayer" && $panel != "kontaktor" && $panel != "pekerjaan" && $panel != "proyek" && $panel != "rab" && $panel != "material" && $panel != "alat" && $panel != "status"){
+                            	include 'error.php';
                             }
                         }else{
                                 include 'home.php';

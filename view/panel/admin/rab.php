@@ -95,7 +95,7 @@
         <li>
             <li>
                 <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="#">Home</a>
+                <a href="<?= $_SESSION['baseAdmin']?>">Home</a>
             </li>
 
             <li>
@@ -298,7 +298,7 @@
 
                                                             $kode = kode('id_rab','rab');
                                                         ?>
-                                                        <input name="rabkod" type="text" class="form-control" id="" placeholder="" autocomplete="off" readonly="" value="<?= "RAB/".$kode."/".date('dmy'); ?>">
+                                                        <input name="rabkod" type="text" class="form-control" id="" placeholder="" autocomplete="off" readonly="" value="<?= "RAB/".$kode."/".date('dmy'); ?>" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
@@ -321,42 +321,42 @@
 												<div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Upah <span class="text-danger">*</span></label>
-                                                        <input type="text" name="upah" id="" class="form-control money" autocomplete="off">
+                                                        <input type="text" name="upah" id="" class="form-control money" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Material <span class="text-danger">*</span></label>
-                                                        <input type="text" name="material" id="" class="form-control money" autocomplete="off">
+                                                        <input type="text" name="material" id="" class="form-control money" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Fee 	<span class="text-danger">*</span></label>
-                                                        <input type="text" name="fee" id="" class="form-control money addfee" autocomplete="off">
+                                                        <input type="text" name="fee" id="" class="form-control money addfee" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Total <span class="text-danger"></span></label>
-                                                        <input type="text" name="addtotal" id="" class="form-control money" autocomplete="off" readonly="">
+                                                        <input type="text" name="addtotal" id="" class="form-control money" autocomplete="off" readonly="" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">PPn <span class="text-danger">*</span></label>
-                                                        <input type="text" name="PPn" id="" class="form-control " autocomplete="off">
+                                                        <input type="text" name="PPn" id="" class="form-control " autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Grand Total <span class="text-danger"></span></label>
-                                                        <input type="text" name="addgtotal" id="" class="form-control money" autocomplete="off" readonly="">
+                                                        <input type="text" name="addgtotal" id="" class="form-control money" autocomplete="off" readonly="" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
@@ -426,7 +426,7 @@
 
                                                             $kode = kode('id_rab','rab');
                                                         ?>
-                                                        <input name="rabkodu" type="text" class="form-control" id="" placeholder="" autocomplete="off" readonly="">
+                                                        <input name="rabkodu" type="text" class="form-control" id="" placeholder="" autocomplete="off" readonly="" required="">
                                                         <input name="idrab" type="hidden">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
@@ -434,7 +434,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label" for="form-field-select-3">Proyek</label>
-                                                        <select class="chosen-select form-control" id="" name="proyekId">
+                                                        <select class="chosen-select form-control" id="" name="proyekId" required="">
                                                                 <option value="" class="proyek" selected="">Pilih Proyek</option>
                                                         <?php 
                                                             foreach ($proyekData as $proyek) :
@@ -451,42 +451,42 @@
                                                     <div class="form-group">
                                                         <label class="form-control-label">Upah <span class="text-danger ">*</span>
                                                         </label>
-                                                        <input type="text" name="upah" id="" class="form-control money uuph" autocomplete="off">
+                                                        <input type="text" name="upah" id="" class="form-control money uuph" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Material <span class="text-danger">*</span></label>
-                                                        <input type="text" name="material" id="umaterial" class="form-control money umtrl" autocomplete="off">
+                                                        <input type="text" name="material" id="umaterial" class="form-control money umtrl" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Fee 	<span class="text-danger">*</span></label>
-                                                        <input type="text" name="fee" id="" class="form-control money ufe" autocomplete="off">
+                                                        <input type="text" name="fee" id="" class="form-control money ufe" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Total <span class="text-danger"></span></label>
-                                                        <input type="text" name="total" id="" class="form-control money utotal" autocomplete="off" readonly="">
+                                                        <input type="text" name="total" id="" class="form-control money utotal" autocomplete="off" readonly="" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">PPn <span class="text-danger">*</span></label>
-                                                        <input type="text" name="PPn" id="" class="form-control uppn" autocomplete="off">
+                                                        <input type="text" name="PPn" id="" class="form-control uppn" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Grand Total <span class="text-danger"></span></label>
-                                                        <input type="text" name="gtotal" id="" class="form-control money ugtotal" autocomplete="off" readonly="">
+                                                        <input type="text" name="gtotal" id="" class="form-control money ugtotal" autocomplete="off" readonly="" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>

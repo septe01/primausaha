@@ -1,81 +1,89 @@
 <?php 
     // tambah data
-     if(isset($_POST["btn-usr"])){  
-        $nmdpn      = htmlspecialchars($_POST['nmdpn']);
-        $nmblkg     = htmlspecialchars($_POST['nmblkg']);
-        $email      = htmlspecialchars($_POST['email']);
-        $username   = strtolower(htmlspecialchars($_POST['username']));
-        $alamat     = htmlspecialchars($_POST['alamat']);
-        $tgllhr     = htmlspecialchars($_POST['tgllhr']);
-        $pass       = password_hash('123456',PASSWORD_DEFAULT);
-        $level      = htmlspecialchars($_POST['level']);
+     if(isset($_POST["btn-rab"])){ 
 
-        $field = 'id_user,nama_depan,nama_belakang,email,username,alamat,tanggal_lahir,password,level';
-        $data  = "'','$nmdpn','$nmblkg','$email','$username','$alamat','$tgllhr','$pass','$level'";
-        if(tambahData("user", $field, $data) > 0 ){
-            echo "<script>
-                    alert('Data Berhasil di Tambah.');
-                  </script>
-            "; 
-        }else{
-            echo "<script>
-                    alert('Data Gagal di Tambah.');
-                  </script>
-            "; 
-        }        
+        $rabkod		       	= htmlspecialchars($_POST['rabkod']);
+     	$tanggal 			= date('Y-m-d');
+        $proyekId       	= htmlspecialchars($_POST['proyekId']);
+
+        $upah         		= str_replace(",", "", htmlspecialchars($_POST['upah']));
+        $material 			= str_replace(",", "", htmlspecialchars($_POST['material']));
+        $fee 				= str_replace(",", "", htmlspecialchars($_POST['fee']));
+        $total 				= str_replace(",", "", htmlspecialchars($_POST['addtotal']));
+        $ppn 				= htmlspecialchars($_POST['PPn']);
+        $gtotal				= str_replace(",", "", htmlspecialchars($_POST['addgtotal']));
+
+        $field = 'id_rab,kode_rab,tanggal,id_proyek,upah,material,fee,total,ppn,grand_total';
+            $data  = "null,'$rabkod','$tanggal','$proyekId','$upah','$material','$fee','$total','$ppn','$gtotal'";
+            if(tambahData("rab", $field, $data) > 0 ){
+                echo "<script>
+                        alert('Data Berhasil di Tambah.');
+                      </script>
+                "; 
+            }else{
+                echo "<script>
+                        alert('Data Gagal di Tambah.');
+                      </script>
+                "; 
+            } 
     }
 
     // tampil data
-    $users = tampilData("user");
+    $Rab = tampilData("rab");
+    $kontraktor = tampilData("kontraktor");
+    // if not exists
+    $proyekData = tampilIfExist("data_proyek","rab","id_proyek");
 
     // hapus data pengguna
     if(isset($_POST['hapus']) > 0){
-       if( hapus("user",'id_user',$_POST) ){
+       if( hapus("rab",'id_rab',$_POST) ){
            echo "<script>
                     alert('Data Berhasil di Hapus.');
-                    document.location.href='http://localhost/primausaha/?panel=user';
+                    document.location.href='{$_SESSION['baseAdmin']}?panel=rab';
                   </script>
             ";
        }
     }
 
-    // ubah data pengguna
-    if(isset($_POST['btn-admubhusr'])){
-        $id = htmlspecialchars($_POST['id']);
-        $id = "id_user=".$id;
+    // ubah data
+    if(isset($_POST['btn-ubhrab'])){
+    	$rabId 				= htmlspecialchars($_POST['idrab']);
+        $rabkod		       	= htmlspecialchars($_POST['rabkodu']);
+     	$tanggal 			= date('Y-m-d');
+        $proyekId       	= htmlspecialchars($_POST['proyekId']);
 
-        $nmdpn = htmlspecialchars($_POST['nmdpn']);
-        $nmblkg = htmlspecialchars($_POST['nmblkg']);
-        $email = htmlspecialchars($_POST['email']);
-        $username = htmlspecialchars($_POST['username']);
-        $alamat = htmlspecialchars($_POST['alamat']);
-        $tgllhr = htmlspecialchars($_POST['tgllhr']);
-        $level = htmlspecialchars($_POST['level']);
+        $upah         		= str_replace(",", "", htmlspecialchars($_POST['upah']));
+        $material 			= str_replace(",", "", htmlspecialchars($_POST['material']));
+        $fee 				= str_replace(",", "", htmlspecialchars($_POST['fee']));
+        $total 				= str_replace(",", "", htmlspecialchars($_POST['total']));
+        $ppn 				= htmlspecialchars($_POST['PPn']);
+        $gtotal				= str_replace(",", "", htmlspecialchars($_POST['gtotal']));
 
-        $data =     "nama_depan='$nmdpn'".",".
-                    "nama_belakang='$nmblkg'".",".
-                    "email='$email'".",".
-                    "username='$username'".",".
-                    "alamat='$alamat'".",".
-                    "tanggal_lahir='$tgllhr'".",".
-                    "level='$level'";
-        
-        
+         
+        $data =     "kode_rab   ='{$rabkod}',
+                    tanggal		='{$tanggal}',
+                    id_proyek   ='{$proyekId}',
+                    upah        ='{$upah}',
+                    material    ='{$material}',
+                    fee         ='{$fee}',
+                    total       ='{$total}',
+                    ppn         ='{$ppn}',
+                    grand_total ='{$gtotal}'
+                    ";
+        $idrab = 	"id_rab     ='{$rabId}'";
 
-        if(ubahdata( $data, "user", $id ) > 0 ){
-            echo "<script>
-                    alert('Data Berhasil di Ubah.');
-                    document.location.href='http://localhost/primausaha/';
-                  </script>
-            "; 
-        }else{
-            echo "<script>
-                    alert('Data Gagal di Ubah.');
-                  </script>
-            "; 
-        } 
-        
-
+            if(ubahdata( $data, "rab", $idrab ) > 0 ){
+                echo "<script>
+                        alert('Data Berhasil di Ubah.');
+                        document.location.href='{$_SESSION['baseAdmin']}?panel=rab';
+                      </script>
+                "; 
+            }else{
+                echo "<script>
+                        alert('Data Gagal di Ubah.');
+                      </script>
+                "; 
+            } 
         
     }
 
@@ -85,8 +93,15 @@
 <div class="breadcrumbs ace-save-state" id="breadcrumbs">
     <ul class="breadcrumb">
         <li>
-            <i class="ace-icon fa fa-user user-icon"></i>
-            <a href="#">User</a>
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="<?= $_SESSION['baseAdmin']?>">Home</a>
+            </li>
+
+            <li>
+                <a href="#">Proyek</a>
+            </li>
+            <li class="active">Data RAB</li>
         </li>
         <!-- <li class="active">Dashboard</li> -->
     </ul><!-- /.breadcrumb -->  
@@ -164,7 +179,7 @@
     <!-- main -->
     <div class="page-header">
         <h1>
-            List Pengguna
+            List RAB
         </h1>
     </div><!-- /.page-header -->
 
@@ -180,7 +195,7 @@
                     <div class="clearfix">
                         <!-- tableTools-container <-class buat tools -->
                         <div class="pull-right mb-1">
-                            <button class="btn btn-white btn-primary btn-bold admtmbhusr" data-toggle="modal" data-target="#tambahusr"><i class="ace-icon fa glyphicon-plus bigger-110 blue"></i>tambah data</button>
+                            <button class="btn btn-white btn-primary btn-bold tmbrab" data-toggle="modal" data-target="#tambahusr"><i class="ace-icon fa glyphicon-plus bigger-110 blue"></i>tambah data</button>
                         </div>
                     </div>
                     <div class=" table-responsive">
@@ -188,51 +203,61 @@
                             <thead>
                                 <tr>
                                    <th>No</th>
-                                   <th>Nama</th>
-                                   <th>Email</th>
-                                   <th>Username</th>
-                                   <th>Tanggal Lahir</th>
-                                   <th>Alamat</th>
-                                   <th>Level</th>
-                                    <th class="hidden-480" style="color: #707070; width:10%">Aksi</th>
+                                   <th>Kode Rab</th>
+                                   <th>Tanggal</th>
+                                   <th>Proyek</th>
+                                   <th>Upah</th>
+                                   <th>Material</th>
+                                   <th>Fee</th>
+                                   <th>Total</th>
+                                   <th>PPn</th>
+                                   <th>Grand Total</th>
+                                   <th class="hidden-480" style="color: #707070; width:10%">Aksi</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 <?php 
                                 $no = 1;
-                                    foreach ($users as $usr) :
+                                    foreach ($Rab as $rb) :
+                                	$proyek = tampilByID("data_proyek", "id_proyek", $rb['id_proyek'] );
                                 ?>
                                     <tr>
                                         <td><?= $no; ?></td>
-                                        <td><?= $usr['nama_depan']." ".$usr['nama_belakang'] ?></td>
-                                        <td><?= $usr['email']; ?></td>
-                                        <td><?= $usr['username']; ?></td>
-                                        <td><?= $usr['tanggal_lahir']; ?></td>
-                                        <td><?= $usr['alamat']; ?></td>
-                                        <td><?= $usr['level']; ?></td>
+                                        <td><?= $rb['kode_rab'] ?></td>
+                                        <td><?= $rb['tanggal'] ?></td>
+                                        <td><?= $proyek['nama_proyek'] ?></td>
+                                        <td>Rp. <?= number_format($rb['upah']) ?></td>
+                                        <td>Rp. <?= number_format($rb['material']) ?></td>
+                                        <td>Rp. <?= number_format($rb['fee']) ?></td>
+                                        <td>Rp. <?= number_format($rb['total']) ?></td>
+                                        <td><?= $rb['ppn'] ?> %</td>
+                                        <td>Rp. <?= number_format($rb['grand_total'])?></td>
+
                                         <td style="text-align:center">
                                             <div class="hidden-sm hidden-xs action-buttons">
 
-                                                <a class="green admubahusr" href="#"
+                                                <a class="green ubhrab" href="#"
                                                     data-toggle="modal"
-                                                    data-target="#admubah"
-                                                    data-id="<?= $usr['id_user']; ?>"
-                                                    data-nmdpn="<?= $usr['nama_depan']; ?>"
-                                                    data-nmblkg="<?= $usr['nama_belakang']; ?>"
-                                                    data-email="<?= $usr['email']; ?>"
-                                                    data-username="<?= $usr['username']; ?>"
-                                                    data-alamat="<?= $usr['alamat']; ?>"
-                                                    data-tgl="<?= $usr['tanggal_lahir']; ?>"
-                                                    data-level="<?= $usr['level']; ?>"
+                                                    data-target="#rabUbah"
+                                                    data-idrab = "<?= $rb['id_rab'] ?>"
+                                                    data-koderab = "<?= $rb['kode_rab'] ?>"
+                                                    data-namaproyek = "<?= $proyek['nama_proyek'] ?>"
+                                                    data-idproyek = "<?= $rb['id_proyek'] ?>"
+                                                    data-upah = "<?= $rb['upah'] ?>"
+                                                    data-material = "<?= $rb['material'] ?>"
+                                                    data-fee = "<?= $rb['fee'] ?>"
+                                                    data-total = "<?= $rb['total'] ?>"
+                                                    data-ppn = "<?= $rb['ppn'] ?>"
+                                                    data-gtotal = "<?= $rb['grand_total'] ?>"
                                                 >
                                                     <i class="ace-icon fa fa-pencil bigger-130"></i>
                                                 </a>
 
-                                                <a class="red usrhps" href="#" 
+                                                <a class="red rabhps" href="#" 
                                                 data-toggle="modal" 
-                                                data-target="#admhps"                                       
-                                                data-id="<?= $usr['id_user']; ?>"
+                                                data-target="#proyekhps"
+                                                data-id="<?= $rb['id_rab'] ?>"
                                                 >
                                                     <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                                 </a>
@@ -248,8 +273,8 @@
                     </div>
                     
                 <!-- MODAL -->
-                    <!-- modal tambah user -->
-                        <form method="post" onsubmit="">
+                    <!-- modal tambah data -->
+                        <form method="post" onsubmit="" class="posttambah">
                             <div id="tambahusr" class="modal fade">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
@@ -257,7 +282,7 @@
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                                 <span aria-hidden="true" style="outline: none">×</span>
                                             </button>
-                                            <h4 class="modal-title">Tambah Pengguna</h4>
+                                            <h4 class="modal-title">Tambah RAB</h4>
                                             <!-- <button type="button" class="close" data-dismiss="modal">
                                                 <span aria-hidden="true">×</span>
                                                 <span class="sr-only">tutup</span>
@@ -265,64 +290,82 @@
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
+
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label">Nama Depan</label>
-                                                        <input name="nmdpn" type="text" class="form-control" value="" autocomplete="off" autofocus placeholder="Jimmy">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Nama Belakang</label>
-                                                        <input name="nmblkg" id="" type="text" class="form-control" placeholder="Rahmana" autocomplete="off" >
+                                                        <label class="form-control-label">Kode Rab</label>
+                                                        <?php 
+
+                                                            $kode = kode('id_rab','rab');
+                                                        ?>
+                                                        <input name="rabkod" type="text" class="form-control" id="" placeholder="" autocomplete="off" readonly="" value="<?= "RAB/".$kode."/".date('dmy'); ?>" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label">Email</label>
-                                                        <input name="email" type="email" class="form-control" id="" placeholder="Jimmy@rahmana.com" autocomplete="off" >
-                                                        <small id="" class="form-text text-danger"></small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Username</label>
-                                                        <input name="username" type="text" id="" class="form-control" placeholder="jimmy" autocomplete="off" >
-                                                        <small id="" class="form-text text-danger"></small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Tanggal Lahir</label>
-                                                        <input type="date" name="tgllhr" id="" class="form-control" autocomplete="off">
-                                                        <small id="" class="form-text text-danger"></small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Level</label>
-                                                        <select name="level" id="" class="custom-select form-control">
-                                                            <option value="">Pilih</option>
-                                                            <option value="admin">Admin</option>
-                                                            <option value="owner">Owner</option>
-                                                            <option value="manager">Manager</option>
+                                                        <label class="form-control-label" for="form-field-select-3">Proyek</label>
+                                                        <select class="chosen-select form-control" id="" name="proyekId" required="">
+                                                                <option value="">Pilih Proyek</option>
+                                                        <?php 
+                                                            foreach ($proyekData as $proyek) :
+                                                         ?>
+                                                                <option value="<?= $proyek['id_proyek'] ?>"><?= $proyek['nama_proyek'] ?></option>
+                                                        <?php 
+                                                            endforeach;
+                                                         ?>
+
                                                         </select>
+                                                    </div>
+                                                </div>
+												<div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Upah <span class="text-danger">*</span></label>
+                                                        <input type="text" name="upah" id="" class="form-control money" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label">Alamat</label>
-                                                        <textarea name="alamat" id="" class="form-control" placeholder="Jl.River Raya No.21" autocomplete="off" maxlength="50"></textarea>
+                                                        <label class="form-control-label">Material <span class="text-danger">*</span></label>
+                                                        <input type="text" name="material" id="" class="form-control money" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Fee 	<span class="text-danger">*</span></label>
+                                                        <input type="text" name="fee" id="" class="form-control money addfee" autocomplete="off" required="">
+                                                        <small id="" class="form-text text-danger"></small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Total <span class="text-danger"></span></label>
+                                                        <input type="text" name="addtotal" id="" class="form-control money" autocomplete="off" readonly="" required="">
+                                                        <small id="" class="form-text text-danger"></small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">PPn <span class="text-danger">*</span></label>
+                                                        <input type="text" name="PPn" id="" class="form-control " autocomplete="off" required="">
+                                                        <small id="" class="form-text text-danger"></small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Grand Total <span class="text-danger"></span></label>
+                                                        <input type="text" name="addgtotal" id="" class="form-control money" autocomplete="off" readonly="" required="">
+                                                        <small id="" class="form-text text-danger"></small>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-white btn-danger btn-bold" data-dismiss="modal"><i class="ace-icon fa fa-exclamation-circle bigger-110 red"></i> Tutup</button>
-                                            <button type="submit" name="btn-usr" class="btn btn-white btn-primary btn-bold"><i class="ace-icon fa fa-check-square-o bigger-110 blue"></i> Simpan</button>
+                                            <button type="submit" name="btn-rab" class="btn btn-white btn-primary btn-bold"><i class="ace-icon fa fa-check-square-o bigger-110 blue"></i> Simpan</button>
                                         </div>
                                     </div>
                                 </div>
@@ -330,9 +373,9 @@
                         </form>
 
 
-                    <!-- modal hps user -->
+                    <!-- modal hps -->
                         <form method="post" onsubmit="">
-                            <div id="admhps" class="modal fade">
+                            <div id="proyekhps" class="modal fade">
                                 <div class="modal-dialog modal-md">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -362,78 +405,97 @@
                         </form>
 
                     
-                    <!-- modal ubh user -->
+                    <!-- modal ubh -->
                         <form method="post" onsubmit="">
-                            <div id="admubah" class="modal fade">
+                            <div id="rabUbah" class="modal fade">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
                                                 <span aria-hidden="true" style="outline: none">×</span>
                                             </button>
-                                            <h4 class="modal-title">Ubah Pengguna</h4>
+                                            <h4 class="modal-title">Ubah RAB</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="row">
-                                                <div class="col-lg-6">
-                                                    <input name="id" type="hidden" class="form-control" value="">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Nama Depan</label>
-                                                        <input name="nmdpn" type="text" class="form-control" value="" autocomplete="off" autofocus placeholder="Jimmy">
-                                                    </div>
-                                                </div>
+
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label">Nama Belakang</label>
-                                                        <input name="nmblkg" id="" type="text" class="form-control" placeholder="Rahmana" autocomplete="off" >
+                                                        <label class="form-control-label">Kode Rab</label>
+                                                        <?php 
+
+                                                            $kode = kode('id_rab','rab');
+                                                        ?>
+                                                        <input name="rabkodu" type="text" class="form-control" id="" placeholder="" autocomplete="off" readonly="" required="">
+                                                        <input name="idrab" type="hidden">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label">Email</label>
-                                                        <input name="email" type="email" class="form-control" id="" placeholder="Jimmy@rahmana.com" autocomplete="off" >
-                                                        <small id="" class="form-text text-danger"></small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Username</label>
-                                                        <input name="username" type="text" id="" class="form-control" placeholder="jimmy" autocomplete="off" >
-                                                        <small id="" class="form-text text-danger"></small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Tanggal Lahir</label>
-                                                        <input type="date" name="tgllhr" id="" class="form-control" autocomplete="off">
-                                                        <small id="" class="form-text text-danger"></small>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Level</label>
-                                                        <select name="level" id="" class="custom-select form-control">
-                                                            <option value="">Pilih</option>
-                                                            <option value="admin">Admin</option>
-                                                            <option value="owner">Owner</option>
-                                                            <option value="manager">Manager</option>
+                                                        <label class="form-control-label" for="form-field-select-3">Proyek</label>
+                                                        <select class="chosen-select form-control" id="" name="proyekId" required="">
+                                                                <option value="" class="proyek" selected="">Pilih Proyek</option>
+                                                        <?php 
+                                                            foreach ($proyekData as $proyek) :
+                                                         ?>
+                                                                <option value="<?= $proyek['id_proyek'] ?>"><?= $proyek['nama_proyek'] ?></option>
+                                                        <?php 
+                                                            endforeach;
+                                                         ?>
+
                                                         </select>
+                                                    </div>
+                                                </div>
+												<div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Upah <span class="text-danger ">*</span>
+                                                        </label>
+                                                        <input type="text" name="upah" id="" class="form-control money uuph" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label">Alamat</label>
-                                                        <textarea name="alamat" id="" class="form-control" placeholder="Jl.River Raya No.21" autocomplete="off" maxlength="50"></textarea>
+                                                        <label class="form-control-label">Material <span class="text-danger">*</span></label>
+                                                        <input type="text" name="material" id="umaterial" class="form-control money umtrl" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Fee 	<span class="text-danger">*</span></label>
+                                                        <input type="text" name="fee" id="" class="form-control money ufe" autocomplete="off" required="">
+                                                        <small id="" class="form-text text-danger"></small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Total <span class="text-danger"></span></label>
+                                                        <input type="text" name="total" id="" class="form-control money utotal" autocomplete="off" readonly="" required="">
+                                                        <small id="" class="form-text text-danger"></small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">PPn <span class="text-danger">*</span></label>
+                                                        <input type="text" name="PPn" id="" class="form-control uppn" autocomplete="off" required="">
+                                                        <small id="" class="form-text text-danger"></small>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Grand Total <span class="text-danger"></span></label>
+                                                        <input type="text" name="gtotal" id="" class="form-control money ugtotal" autocomplete="off" readonly="" required="">
+                                                        <small id="" class="form-text text-danger"></small>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-white btn-danger btn-bold" data-dismiss="modal"><i class="ace-icon fa fa-exclamation-circle bigger-110 red"></i> Tutup</button>
-                                            <button type="submit" name="btn-admubhusr" class="btn btn-white btn-primary btn-bold"><i class="ace-icon fa fa-check-square-o bigger-110 blue"></i> Ok</button>
+                                            <button type="submit" name="btn-ubhrab" class="btn btn-white btn-primary btn-bold"><i class="ace-icon fa fa-check-square-o bigger-110 blue"></i> Ok</button>
                                         </div>
                                     </div>
                                 </div>
@@ -446,4 +508,4 @@
             </div>
         </div><!-- /.row -->
     </div>
-</div>
+</div>                                    

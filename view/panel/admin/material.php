@@ -87,7 +87,7 @@ if(isset($_POST['matubah'])){
         <li>
             <li>
                 <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="#">Home</a>
+                <a href="<?= $_SESSION['baseAdmin']?>">Home</a>
             </li>
 
             <li>
@@ -194,7 +194,7 @@ if(isset($_POST['matubah'])){
                                         <div class="modal-header" style="">
                                             <div class="">
                                                 <label for="nm" class="form-field-8">Nama Material</label>
-                                                <input type="text" autofocus class="form-control" placeholder="Nama Material" id="nm" name="nama" autocomplete="off">
+                                                <input type="text" autofocus class="form-control" placeholder="Nama Material" id="nm" name="nama" autocomplete="off" required="">
                                                  <input type="hidden" id="" name="idm">
                                                  <small id="nma" class="form-text text-danger"></small>
                                             </div>

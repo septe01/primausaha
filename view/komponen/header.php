@@ -7,10 +7,16 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
 		<title>Prima Usaha Era Mandiri</title>
-
+		
 		<meta name="description" content="overview &amp; stats" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
+		<!-- button -->
+		<meta name="keywords" content="button, effect, hover, style, inspiration, web design" />
+		<link rel="stylesheet" type="text/css" href="<?=$base_url;?>/assets/css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="<?=$base_url;?>/assets/css/vicons-font.css" />
+		<link rel="stylesheet" type="text/css" href="<?=$base_url;?>/assets/css/base.css" />
+		<link rel="stylesheet" type="text/css" href="<?=$base_url;?>/assets/css/buttons.css" />
+		<!-- /button -->
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="<?=$base_url;?>/assets/css/bootstrap.min.css" />
         <link rel="stylesheet" href="<?=$base_url;?>/assets/font-awesome/4.5.0/css/font-awesome.min.css" />

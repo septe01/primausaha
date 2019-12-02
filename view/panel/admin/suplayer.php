@@ -173,72 +173,48 @@ if(isset($_POST['suppubah'])){
                             </div>
                         </div> -->
                         <div class="row" >
-                            <div class="col-md-4" >
+                            <div class="col-md-3" >
                                 <form method="post" onsubmit="" class="form-horizontal">
-                                    <div class="modal-content" >
+                                    <div class="modal-content pl-1 pr-1" >
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="jdlForm">Tambah Suplayer</h4>
                                         </div>
                                         <div class="modal-header" style="">
-                                            <div class="form-group">
-                                                <div class="col-sm-2 text-left">
-                                                    <label for="nm" class=" control-label">Nama</label>
-                                                </div>
-                                                <div class="col-sm-10">
-                                                <input type="text" autofocus class="form-control" placeholder="Nama" id="nm" name="nama" autocomplete="off">
+                                            <div class="form-group mt--1">
+                                                <label for="nm" class=" control-label">Nama</label>
+                                                <input type="text" autofocus class="form-control" placeholder="Nama" id="nm" name="nama" autocomplete="off" required="">
                                                 <input type="hidden" id="" name="id">
                                                 <small id="nma" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
 
-                                             <div class="form-group">
-                                                <div class="col-sm-2 text-left">
+                                             <div class="form-group mt--1">
                                                     <label for="jns" class=" control-label">Jenis</label>
-                                                </div>
-                                                <div class="col-sm-10">
-                                                <input type="text" autofocus class="form-control" placeholder="Jenis Suplayer" id="jns" name="jenis" autocomplete="off">
+                                                <input type="text" autofocus class="form-control" placeholder="Jenis Suplayer" id="jns" name="jenis" autocomplete="off" required="">
                                                 <small id="jns" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <div class="col-sm-2">
+                                            <div class="form-group mt--1">
                                                     <label class="control-label" for="alamat">Alamat</label>
-                                                </div>  
-                                                <div class="col-sm-10">
-                                                <textarea name="alamat" id="alamat" class="form-control" placeholder="Jl.River Raya No.21" autocomplete="off" maxlength="50"></textarea>
+                                                <textarea name="alamat" id="alamat" class="form-control" placeholder="Jl.River Raya No.21" autocomplete="off" maxlength="50" required=""></textarea>
                                                 <small id="almt" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <div class="col-sm-2">
+                                            <div class="form-group mt--1">
                                                     <label class="control-label" for="hp">No.Hp</label>
-                                                </div>  
-                                                <div class="col-sm-10">
-                                                <input type="text" autofocus class="form-control" placeholder="08129812812" id="hp" name="hp" autocomplite="off" max-lenght=14 >
+                                                <input type="text" autofocus class="form-control" placeholder="08129812812" id="hp" name="hp" autocomplite="off" max-lenght=14 required="">
                                                 <small id="hp" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <div class="col-sm-2">
+                                            <div class="form-group mt--1">
                                                     <label class="control-label" for="fax">Fax</label>
-                                                </div>  
-                                                <div class="col-sm-10">
-                                                <input type="tel" autofocus class="form-control" placeholder="(021) 71323" id="fax" name="fax" autocomplite="off" max-lenght=14 >
+                                                <input type="tel" autofocus class="form-control" placeholder="(021) 71323" id="fax" name="fax" autocomplite="off" max-lenght=14 required="">
                                                 <small id="errorfax" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <div class="col-sm-2">
+                                            <div class="form-group mt--1">
                                                     <label class="control-label" for="email">Email</label>
-                                                </div>  
-                                                <div class="col-sm-10">
-                                                <input name="email" type="email" class="form-control" id="email" placeholder="Supp@gmail.com" autocomplete="off" >
+                                                <input name="email" type="email" class="form-control" id="email" placeholder="Supp@gmail.com" autocomplete="off" required="">
                                                 <small id="errormail" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
                                         </div>

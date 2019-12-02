@@ -485,3 +485,130 @@ $('.batalalt').click(function(){
     $(".supIdu").hide()
     $('[name="supIdu"]').removeAttr('required')
 })
+
+
+
+// ============== status =============
+
+// click btn tambah 
+$('.admtmbhstatus').click(function(argument) {
+    noPreview();
+    $('#status_upload')[0].reset();
+    $('.fileName').text("Select file..");
+})
+
+function noPreview() {
+  $('#image-preview-div').css("display", "none");
+  $('#preview-img').attr('src', 'noimage');
+  $('upload-button').attr('disabled', '');
+}
+
+function selectImage(e) {
+  $('#file').css("color", "green");
+  $('#image-preview-div').css("display", "block");
+  $('#preview-img').attr('src', e.target.result);
+  $('#preview-img').css('max-width', '550px');
+}
+
+$(document).ready(function (e) {
+
+  // var maxsize = 500 * 1024; // 500 KB
+  var maxsize = 2246 * 1024; // 2 mb
+
+  $('#max-size').html((maxsize/1024).toFixed(2));
+
+  $('#status_upload').on('submit', function(e) {
+
+    e.preventDefault();
+
+    $('#message').empty();
+    $('#loading').show();
+// ajax
+    $.ajax({
+      url: "../ajax/status.php",
+      type: "POST",
+      data: new FormData(this),
+      contentType: false,
+      cache: false,
+      processData: false,
+      success: function(data)
+      {
+        $('#loading').hide();
+        $('#message').html(data);
+      }
+    });
+
+  });
+
+  $('#fileUpload').change(function() {
+
+    $('#message').empty();
+
+    var file = this.files[0];
+    var match = ["image/jpeg", "image/png", "image/jpg"];
+
+    if ( !( (file.type == match[0]) || (file.type == match[1]) || (file.type == match[2]) ) )
+    {
+      noPreview();
+
+      $('#message').html(`<div class="alert alert-warning" role="alert">Unvalid image format. Allowed formats: JPG, JPEG, PNG.</div>`);
+        $('#upload-button').attr('disabled', '');
+      return false;
+    }
+
+    if ( file.size > maxsize )
+    {
+      noPreview();
+
+      $('#message').html('<div class=\"alert alert-danger\" role=\"alert\">The size of image you are attempting to upload is ' + (file.size/1024).toFixed(2) + ' KB, maximum size allowed is ' + (maxsize/1024).toFixed(2) + ' KB</div>');
+        $('#upload-button').attr('disabled', '');
+      return false;
+    }
+
+    $('#upload-button').removeAttr("disabled");
+
+    var reader = new FileReader();
+    reader.onload = selectImage;
+    reader.readAsDataURL(this.files[0]);
+
+  });
+
+});
+
+// click btn upload
+function onSubmit(){
+    var idproyek = $('[name="proyekId"]').val()
+    var keterangan = $('[name="keterangan"]').val()
+
+    if(idproyek != "" && keterangan != "" ){
+        setTimeout(function(argument) {
+        $('#tambahstatus').modal('hide')
+
+        },3000)
+        return true
+    }
+        $('#upload-button').attr('disabled', '');
+    
+}
+
+$('input[type=file]').change(function(e) {
+    $in = $(this);
+    $in.next().html($in.val());
+    
+});
+
+$('.btn-stts-detail').click(function(){
+    // ?panel=status&&detail=<?= $stat['id_status']; ?>
+    let idpekerjaan = $(this).data('id')
+    if(idpekerjaan == "" ){
+        document.location.href='?panel=status'
+    }else{
+        document.location.href='?panel=status&&detail='+idpekerjaan
+    }
+})
+
+//dethpus 
+$('.dethpsone').click(function(){
+    var idStatus = $(this).data('idstts')
+    $('[name="id"]').val(idStatus)
+})

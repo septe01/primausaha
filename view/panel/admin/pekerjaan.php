@@ -3,12 +3,13 @@
 // tambah data pekerjaan
     if(isset($_POST['btn-peker'])){
         // var_dump($_POST);die;
-        $nm = htmlspecialchars($_POST['nama']);
-        $jenis = htmlspecialchars($_POST['jenis']);
+        $nm         = htmlspecialchars($_POST['nama']);
+        $jenis      = htmlspecialchars($_POST['jenis']);
         $keterangan = htmlspecialchars($_POST['keterangan']);
+        $tanggal    = date('Y-m-d');
 
-        $field = 'id_pekerjaan,nm_pekerjaan,jenis,keterangan';
-        $data = "null,'$nm','$jenis','$keterangan'";
+        $field = 'id_pekerjaan,nm_pekerjaan,jenis,keterangan,tanggal';
+        $data = "null,'$nm','$jenis','$keterangan','$tanggal '";
         if(tambahData("data_pekerjaan", $field, $data) > 0 ){
             echo "<script>
                     alert('Data Berhasil di Tambah.');
@@ -40,14 +41,16 @@
 // ubah pekerjaan
 if(isset($_POST['pekubah'])){
 
-    $id = htmlspecialchars($_POST['id']);
-    $nama = htmlspecialchars($_POST['nama']);
-    $jenis = htmlspecialchars($_POST['jenis']);
+    $id         = htmlspecialchars($_POST['id']);
+    $nama       = htmlspecialchars($_POST['nama']);
+    $jenis      = htmlspecialchars($_POST['jenis']);
     $keterangan = htmlspecialchars($_POST['keterangan']);
+    $tanggal    = date('Y-m-d');
 
     $data = "nm_pekerjaan='{$nama}',
             jenis='{$jenis}',
-            keterangan='{$keterangan}' ";
+            keterangan='{$keterangan}',
+            tanggal='{$tanggal}' ";
 
     $id = "id_pekerjaan=".$id;
 
@@ -164,40 +167,28 @@ if(isset($_POST['pekubah'])){
                         <div class="row" >
                             <div class="col-md-4" >
                                 <form method="post" onsubmit="" class="form-horizontal kontraktor">
-                                    <div class="modal-content" >
+                                    <div class="modal-content pl-1 pr-1" >
                                         <div class="modal-header">
                                             <h4 class="modal-title jdlForm">Tambah Pekerjaan</h4>
                                         </div>
                                         <div class="modal-header" style="">
-                                            <div class="form-group">
-                                                <div class="col-sm-4 text-left">
+                                            <div class="form-group mt--1">
                                                     <label for="nm" class=" control-label">Nama Pekerjaan</label>
-                                                </div>
-                                                <div class="col-sm-8">
-                                                <input type="text" autofocus class="form-control" placeholder="Nama Pekerjaan" id="nm" name="nama" autocomplete="off">
+                                                <input type="text" autofocus class="form-control" placeholder="Nama Pekerjaan" id="nm" name="nama" autocomplete="off" required="">
                                                 <input type="hidden" id="" name="id">
                                                 <small id="nma" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
 
-                                             <div class="form-group">
-                                                <div class="col-sm-4">
+                                             <div class="form-group mt--1">
                                                     <label class="control-label" for="jenis">Jenis</label>
-                                                </div>  
-                                                <div class="col-sm-8">
-                                                <input type="text" autofocus class="form-control" placeholder="Jenis Pekerjaan Yang Dilakukan" id="jenis" name="jenis" autocomplite="off" max-lenght=14 >
+                                                <input type="text" autofocus class="form-control" placeholder="Jenis Pekerjaan Yang Dilakukan" id="jenis" name="jenis" autocomplite="off" max-lenght=14 required="">
                                                 <small id="jns" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
-                                            <div class="form-group">
-                                                <div class="col-sm-4">
+                                            <div class="form-group mt--1">
                                                     <label class="control-label" for="keterangan">Keterangan</label>
-                                                </div>  
-                                                <div class="col-sm-8">
-                                                <textarea name="keterangan" id="keterangan" class="form-control" placeholder="Keterangan" autocomplete="off" maxlength="70"></textarea>
+                                                <textarea name="keterangan" id="keterangan" class="form-control" placeholder="Keterangan" autocomplete="off" maxlength="70" required=""></textarea>
                                                 <small id="ket" class="form-text text-danger"></small>
-                                                </div>
                                             </div>
                                             
                                             

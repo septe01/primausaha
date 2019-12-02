@@ -25,7 +25,7 @@
 
         if($mulaidate < $selesaidate){
             $field = 'id_proyek,id_pekerjaan,id_kontraktor,nama_proyek,no_spk,lokasi,mulai,selesai,lama,nilai_kontrak';
-            $data  = "'','$pekerjaanId','$kontraktorId','$namaproyek','$nospk','$lokasi','$mulaidate','$selesaidate','$selesai','$nominal'";
+            $data  = "null,'$pekerjaanId','$kontraktorId','$namaproyek','$nospk','$lokasi','$mulaidate','$selesaidate','$selesai','$nominal'";
             if(tambahData("data_proyek", $field, $data) > 0 ){
                 echo "<script>
                         alert('Data Berhasil di Tambah.');
@@ -47,16 +47,18 @@
 
     // tampil data
     $dataProyek = tampilData("data_proyek");
-    $kontraktor = tampilData("kontraktor");
+    // $kontraktor = tampilData("kontraktor");
     // if not exists
     $pekerjaan = tampilIfExist("data_pekerjaan", "data_proyek", "id_pekerjaan");
+    // $kontraktor = tampilIfExist("kontraktor", "data_proyek", "id_kontraktor");
+    $kontraktor = tampilData("kontraktor");
 
     // hapus data pengguna
     if(isset($_POST['hapus']) > 0){
        if( hapus("data_proyek",'id_proyek',$_POST) ){
            echo "<script>
                     alert('Data Berhasil di Hapus.');
-                    document.location.href='http://localhost/primausaha/?panel=proyek';
+                    document.location.href='{$_SESSION['baseAdmin']}?panel=proyek';
                   </script>
             ";
        }
@@ -68,7 +70,7 @@
         $pekerjaanId        = htmlspecialchars($_POST['pekerjaanId']);
         $kontraktorId       = htmlspecialchars($_POST['kontraktorId']);
         $namaproyek         = htmlspecialchars($_POST['nama']);
-        $nospk              = htmlspecialchars($_POST['spk']);
+        $nospk              = htmlspecialchars($_POST['spku']);
         $lokasi             = htmlspecialchars($_POST['lokasi']);
         $mulaidate          = htmlspecialchars($_POST['mulaidate']);
         $selesaidate        = htmlspecialchars($_POST['selesaidate']);
@@ -103,7 +105,7 @@
             if(ubahdata( $data, "data_proyek", $proyekId ) > 0 ){
                 echo "<script>
                         alert('Data Berhasil di Ubah.');
-                        document.location.href='http://localhost/primausaha/?panel=proyek';
+                        document.location.href='{$_SESSION['baseAdmin']}?panel=proyek';
                       </script>
                 "; 
             }else{
@@ -128,7 +130,7 @@
         <li>
             <li>
                 <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="#">Home</a>
+                <a href="<?= $_SESSION['baseAdmin']?>">Home</a>
             </li>
 
             <li>
@@ -331,14 +333,14 @@
                                                         <?php 
                                                             $nospk = kode('id_proyek','data_proyek');
                                                         ?>
-                                                        <input name="spk" type="text" class="form-control" id="" placeholder="" autocomplete="off" readonly="" value="<?= "PUEM/".$nospk."/".date('d')."/".date('M')."/".date('Y'); ?>">
+                                                        <input name="spk" type="text" class="form-control" id="" placeholder="" autocomplete="off" readonly="" value="<?= "PUEM/".$nospk."/".date('d')."/".date('M')."/".date('Y'); ?>" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label" for="form-field-select-3">Jenis Pekerjaan</label>
-                                                        <select class="chosen-select form-control" id="" name="pekerjaanId">
+                                                        <select class="chosen-select form-control" id="" name="pekerjaanId" required="">
                                                                 <option value="">Pilih</option>
                                                         <?php 
                                                             foreach ($pekerjaan as $pekerja) :
@@ -354,8 +356,8 @@
 
                                                  <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="form-field-select-3">Jenis Kontraktor</label>
-                                                        <select class="chosen-select form-control" id="" name="kontraktorId">
+                                                        <label class="form-control-label" for="form-field-select-3">Kontraktor</label>
+                                                        <select class="chosen-select form-control" id="" name="kontraktorId" required="">
                                                              
                                                                 <option value="">Pilih</option>
                                                         <?php 
@@ -372,35 +374,35 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Nama Proyek</label>
-                                                        <input name="nama" id="" type="text" class="form-control" placeholder="Nama Proyek" autocomplete="off" >
+                                                        <input name="nama" id="" type="text" class="form-control" placeholder="Nama Proyek" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Lokasi</label>
-                                                        <input name="lokasi" type="text" id="" class="form-control" placeholder="Lokasi proyek" autocomplete="off" >
+                                                        <input name="lokasi" type="text" id="" class="form-control" placeholder="Lokasi proyek" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Mulai Proyek</label>
-                                                        <input type="date" name="mulaidate" id="" class="form-control" autocomplete="off">
+                                                        <input type="date" name="mulaidate" id="" class="form-control" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Selesai Proyek</label>
-                                                        <input type="date" name="selesaidate" id="" class="form-control" autocomplete="off">
+                                                        <input type="date" name="selesaidate" id="" class="form-control" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Nilai Kontrak</label>
-                                                        <input type="text" name="nilaiKontrak" id="" class="form-control money" autocomplete="off">
+                                                        <input type="text" name="nilaiKontrak" id="" class="form-control money" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
@@ -466,7 +468,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Nomer SPK</label>
-                                                        <input name="spku" type="text" class="form-control" id="" placeholder="" autocomplete="off" readonly="">
+                                                        <input name="spku" type="text" class="form-control" id="" placeholder="" autocomplete="off" readonly="" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                         <input name="proyekId" type="hidden">
                                                     </div>
@@ -474,7 +476,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label" for="form-field-select-3">Jenis Pekerjaan</label>
-                                                        <select class="chosen-select form-control" id="" name="pekerjaanId">
+                                                        <select class="chosen-select form-control" id="" name="pekerjaanId" required="">
                                                                 <option value="" class="oppkerjaan" selected=""></option>
                                                         <?php 
                                                             foreach ($pekerjaan as $pekerja) :
@@ -491,10 +493,10 @@
 
                                                  <div class="col-lg-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label" for="form-field-select-3">Jenis Kontraktor</label>
-                                                        <select class="chosen-select form-control" id="" name="kontraktorId">
+                                                        <label class="form-control-label" for="form-field-select-3">Kontraktor</label>
+                                                        <select class="chosen-select form-control" id="" name="kontraktorId" required="">
                                                              
-                                                                <option value="" class="optkontraktor" selected="">Pilih</option>
+                                                                <option value="" class="optkontraktor" selected=""></option>
                                                         <?php 
                                                             foreach ($kontraktor as $kontrak) :
                                                         ?>
@@ -509,35 +511,35 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Nama Proyek</label>
-                                                        <input name="nama" id="" type="text" class="form-control" placeholder="Nama Proyek" autocomplete="off" >
+                                                        <input name="nama" id="" type="text" class="form-control" placeholder="Nama Proyek" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Lokasi</label>
-                                                        <input name="lokasi" type="text" id="" class="form-control" placeholder="Lokasi proyek" autocomplete="off" >
+                                                        <input name="lokasi" type="text" id="" class="form-control" placeholder="Lokasi proyek" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Mulai Proyek</label>
-                                                        <input type="date" name="mulaidate" id="" class="form-control" autocomplete="off">
+                                                        <input type="date" name="mulaidate" id="" class="form-control" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Selesai Proyek</label>
-                                                        <input type="date" name="selesaidate" id="" class="form-control" autocomplete="off">
+                                                        <input type="date" name="selesaidate" id="" class="form-control" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label class="form-control-label">Nilai Kontrak</label>
-                                                        <input type="text" name="nilaiKontrak" id="" class="form-control money" autocomplete="off">
+                                                        <input type="text" name="nilaiKontrak" id="" class="form-control money" autocomplete="off" required="">
                                                         <small id="" class="form-text text-danger"></small>
                                                     </div>
                                                 </div>
